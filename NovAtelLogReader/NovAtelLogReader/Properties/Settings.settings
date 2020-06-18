@@ -1,0 +1,52 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NovAtelLogReader.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ComPortSpeed" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">115200</Value>
+    </Setting>
+    <Setting Name="TextFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">E:\Source\range.txt</Value>
+    </Setting>
+    <Setting Name="RabbitConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">amqp://uniframe:uniframe@172.20.12.50:5672/</Value>
+    </Setting>
+    <Setting Name="KafkaBrokers" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ion-node-01</Value>
+    </Setting>
+    <Setting Name="PublishRate" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="Publisher" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">NovAtelLogReader.Publishers.KafkaPublisher</Value>
+    </Setting>
+    <Setting Name="Reader" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">NovAtelLogReader.Readers.ComPortReader</Value>
+    </Setting>
+    <Setting Name="Format" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">NovAtelLogReader.LogRecordFormats.BinaryLogRecordFormat</Value>
+    </Setting>
+    <Setting Name="ComPortName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM2</Value>
+    </Setting>
+    <Setting Name="InitCommands" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;UNLOGALL TRUE&lt;/string&gt;
+  &lt;string&gt;CNOUPDATE 20HZ&lt;/string&gt;
+  &lt;string&gt;DIFFCODEBIASCONTROL DISABLE&lt;/string&gt;
+  &lt;string&gt;EXTERNALCLOCK DISABLE&lt;/string&gt;
+  &lt;string&gt;RTKDYNAMICS STATIC&lt;/string&gt;
+  &lt;string&gt;SETIONOTYPE L1L2&lt;/string&gt;
+  &lt;string&gt;ISMBANDWIDTH 1.0 0.0&lt;/string&gt;
+  &lt;string&gt;ISMSIGNALCONTROL GPSL2P ENABLE ENABLE&lt;/string&gt;
+  &lt;string&gt;LOG PSRPOSB ONTIME 1&lt;/string&gt;
+  &lt;string&gt;LOG RANGEB ONTIME 0.02&lt;/string&gt;
+  &lt;string&gt;LOG ISMRAWTECB ONNEW&lt;/string&gt;
+  &lt;string&gt;LOG ISMDETOBSB ONNEW&lt;/string&gt;
+  &lt;string&gt;LOG ISMREDOBSB ONNEW&lt;/string&gt;
+  &lt;string&gt;LOG SATXYZ2B ONTIME 10&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

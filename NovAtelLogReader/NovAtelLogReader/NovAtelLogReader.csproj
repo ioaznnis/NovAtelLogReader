@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\librdkafka.redist.0.11.3\build\librdkafka.redist.props" Condition="Exists('..\packages\librdkafka.redist.0.11.3\build\librdkafka.redist.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3ABBE911-C2EE-4041-9864-C4F1BC959D9D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NovAtelLogReader</RootNamespace>
+    <AssemblyName>NovAtelLogReader</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;USE_PI_SERIAL_PORT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE;USE_PI_SERIAL_PORT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Confluent.Kafka, Version=0.11.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Confluent.Kafka.0.11.3\lib\net46\Confluent.Kafka.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Avro.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Avro.Core.0.1.0\lib\net451\Microsoft.Avro.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.1.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.TypeConverter.4.1.0\lib\net45\System.ComponentModel.TypeConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FatalException.cs" />
+    <Compile Include="ListConverters\ListConverterAttribute.cs" />
+    <Compile Include="DataPoints\DataPointIsmdetobs.cs" />
+    <Compile Include="DataPoints\DataPointIsmrawtec.cs" />
+    <Compile Include="DataPoints\DataPointIsmredobs.cs" />
+    <Compile Include="DataPoints\DataPointPsrpos.cs" />
+    <Compile Include="DataPoints\DataPointSatvis.cs" />
+    <Compile Include="DataPoints\DataPointSatxyz2.cs" />
+    <Compile Include="DataPoints\DataPointAttribute.cs" />
+    <Compile Include="ListConverters\IListConverter.cs" />
+    <Compile Include="ListConverters\Satxyz2ListConverter.cs" />
+    <Compile Include="ListConverters\IsmdetobsConverter.cs" />
+    <Compile Include="ListConverters\IsmrawtecListConverter.cs" />
+    <Compile Include="ListConverters\IsmredobsListConverter.cs" />
+    <Compile Include="ListConverters\PsrposListConverter.cs" />
+    <Compile Include="ListConverters\SatvisListConverter.cs" />
+    <Compile Include="ListConverters\RangeListConverter.cs" />
+    <Compile Include="LogRecordFormats\Ascii\AbstractAsciiParser.cs" />
+    <Compile Include="LogRecordFormats\Ascii\IsmredobsParser.cs" />
+    <Compile Include="LogRecordFormats\Ascii\IsmdetobsParser.cs" />
+    <Compile Include="LogRecordFormats\Ascii\IsmrawtecParser.cs" />
+    <Compile Include="LogRecordFormats\Ascii\PsrposParser.cs" />
+    <Compile Include="LogRecordFormats\Ascii\SatvisParser.cs" />
+    <Compile Include="LogRecordFormats\Ascii\RangeParser.cs" />
+    <Compile Include="LogRecordFormats\Binary\AbstractBinaryParser.cs" />
+    <Compile Include="LogRecordFormats\Binary\IsmdetobsParser.cs" />
+    <Compile Include="LogRecordFormats\Binary\IsmrawtecParser.cs" />
+    <Compile Include="LogRecordFormats\Binary\IsmredobsParser.cs" />
+    <Compile Include="LogRecordFormats\Binary\PsrposParser.cs" />
+    <Compile Include="LogRecordFormats\Binary\RangeParser.cs" />
+    <Compile Include="LogRecordFormats\Binary\Satxyz2Parser.cs" />
+    <Compile Include="LogRecordFormats\Binary\SatvisParser.cs" />
+    <Compile Include="LogRecordFormats\IParser.cs" />
+    <Compile Include="LogRecordFormats\ParserAttribute.cs" />
+    <Compile Include="Publishers\AbstractGenericPublisher.cs" />
+    <Compile Include="Publishers\KafkaPublisher.cs" />
+    <Compile Include="LogData\LogDataSatxyz2.cs" />
+    <Compile Include="LogRecordFormats\AsciiLogRecordFormat.cs" />
+    <Compile Include="LogRecordFormats\BinaryLogRecordFormat.cs" />
+    <Compile Include="Readers\ComPortReader.cs" />
+    <Compile Include="DataPoints\DataPointRange.cs" />
+    <Compile Include="LogRecordFormats\ILogRecordFormat.cs" />
+    <Compile Include="LogData\LogDataIsmdetobs.cs" />
+    <Compile Include="LogData\LogDataIsmrawtec.cs" />
+    <Compile Include="LogData\LogDataIsmredobs.cs" />
+    <Compile Include="LogData\LogDataPsrpos.cs" />
+    <Compile Include="LogData\LogDataSatvis.cs" />
+    <Compile Include="Processor.cs" />
+    <Compile Include="Publishers\RabbitMQPublisher.cs" />
+    <Compile Include="Readers\TextFileReader.cs" />
+    <Compile Include="Publishers\IPublisher.cs" />
+    <Compile Include="Readers\IReader.cs" />
+    <Compile Include="LogData\LogDataBase.cs" />
+    <Compile Include="LogData\LogDataRange.cs" />
+    <Compile Include="LogData\LogHeader.cs" />
+    <Compile Include="LogData\LogRecord.cs" />
+    <Compile Include="LogData\NavigationSystem.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Readers\ReceiveEventArgs.cs" />
+    <Compile Include="LogData\SignalType.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="PInvoke\COMMPROP.cs" />
+    <Compile Include="PInvoke\COMMTIMEOUTS.cs" />
+    <Compile Include="PInvoke\COMSTAT.cs" />
+    <Compile Include="PInvoke\DCB.cs" />
+    <Compile Include="PInvoke\Win32.cs" />
+    <Compile Include="PInvoke\PISerialPort.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\librdkafka.redist.0.11.3\build\librdkafka.redist.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\librdkafka.redist.0.11.3\build\librdkafka.redist.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
