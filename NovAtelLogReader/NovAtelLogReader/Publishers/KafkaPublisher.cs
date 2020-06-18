@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Hadoop.Avro;
-using Confluent.Kafka.Serialization;
 using Confluent.Kafka;
 using System.IO;
 using System.Reflection;
@@ -23,7 +22,7 @@ namespace NovAtelLogReader.Publishers
             return config;
         }
 
-        public byte[] Serialize(string topic, List<T> data)
+        public byte[] Serialize(List<T> data, SerializationContext context)
         {
             using (var buffer = new MemoryStream())
             {
@@ -56,14 +55,16 @@ namespace NovAtelLogReader.Publishers
             _producers.Clear();
         }
 
-        private object CreateProducer<T>(Dictionary<string, object> config)
+        private object CreateProducer<T>(Dictionary<string, string> config)
         {
-            return new Producer<Null, List<T>>(config, null, new DataPointListSerializer<T>());
+            return new ProducerBuilder<Null, List<T>>(config)
+                .SetValueSerializer(new DataPointListSerializer<T>())
+                .Build();
         }
 
         public override void Open()
         {
-            var config = new Dictionary<string, object> { { "bootstrap.servers", Properties.Settings.Default.KafkaBrokers } };
+            var config = new Dictionary<string, string> { { "bootstrap.servers", Properties.Settings.Default.KafkaBrokers } };
 
             _queues.Clear();
             _producers.Clear();
@@ -85,7 +86,7 @@ namespace NovAtelLogReader.Publishers
         {
             if (_producers.ContainsKey(typeof(T)) && _queues.ContainsKey(typeof(T)))
             {
-                (_producers[typeof(T)] as Producer<Null, List<T>>).ProduceAsync(_queues[typeof(T)], null, value);
+                (_producers[typeof(T)] as IProducer<Null, List<T>>).ProduceAsync(_queues[typeof(T)], new Message<Null, List<T>>(){Value = value});
             }
         }
     }
