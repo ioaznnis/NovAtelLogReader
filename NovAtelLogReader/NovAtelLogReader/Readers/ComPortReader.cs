@@ -134,5 +134,14 @@ namespace NovAtelLogReader.Readers
                 }
             }
         }
+
+        public static void GetAvailablePortNames()
+        {
+            Console.WriteLine("The following serial ports were found:");
+            foreach (var port in SerialPort.GetPortNames())
+            {
+                Console.WriteLine(port);
+            }
+        }
     }
 }

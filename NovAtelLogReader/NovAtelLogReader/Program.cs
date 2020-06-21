@@ -85,6 +85,8 @@ namespace NovAtelLogReader
     {
         public static void Main()
         {
+            ComPortReader.GetAvailablePortNames();
+            
             var pipe = new NamedPipeClientStream(".", "novatel-log-reader", PipeDirection.InOut);
             var service = new NovAtelService();
 
