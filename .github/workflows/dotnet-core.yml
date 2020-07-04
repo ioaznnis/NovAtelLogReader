@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore NovAtelLogReader/NovAtelLogReader/
     - name: Build
-      run: dotnet build /NovAtelLogReader/NovAtelLogReader --configuration Release --no-restore
+      run: dotnet build NovAtelLogReader/NovAtelLogReader --configuration Release --no-restore
 #     - name: Test
 #       run: dotnet test --no-restore --verbosity normal
